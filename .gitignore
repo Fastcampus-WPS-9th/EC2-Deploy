@@ -1,8 +1,9 @@
 # Secrets
 /.secrets
 
-# Media(Store User-uploaded files)
+# Static, Media ROOT
 /.media
+/.static
 
 # Created by https://www.gitignore.io/api/django
 

@@ -3,9 +3,14 @@
 FROM        ubuntu:18.04
 MAINTAINER  dev@lhy.kr
 
+# 패키지 업그레이드, Python3설치
 RUN         apt -y update
 RUN         apt -y dist-upgrade
 RUN         apt -y install python3-pip
+
+# Nginx, uWSGI 설치 (WebServer, WSGI)
+RUN         apt -y install nginx
+RUN         pip3 install uwsgi
 
 # docker build할때의 PATH에 해당하는 폴더의 전체 내용을
 #  Image의 /srv/project/폴더 내부에 복사
