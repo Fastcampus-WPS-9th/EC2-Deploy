@@ -24,6 +24,7 @@ WORKDIR     /srv/project
 # settings모듈에 대한 환경변수 설정
 # export DJANGO_SETTINGS_MODULE=config.settings.production
 ENV         DJANGO_SETTINGS_MODULE  config.settings.production
+ENV         LANG                    C.UTF-8
 
 # 프로세스를 실행할 명령
 WORKDIR     /srv/project/app
