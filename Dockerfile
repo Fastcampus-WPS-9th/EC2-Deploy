@@ -1,15 +1,12 @@
 # 이미지 빌드(ec2-deploy폴더에서 실행)
 #  docker build -t ec2-deploy -f Dockerfile .
-FROM        ubuntu:18.04
+FROM        python:3.6.7-slim
 MAINTAINER  dev@lhy.kr
+ENV         LANG                    C.UTF-8
 
-# 패키지 업그레이드, Python3설치
 RUN         apt -y update
 RUN         apt -y dist-upgrade
-RUN         apt -y install python3-pip
-
-# Nginx, uWSGI 설치 (WebServer, WSGI)
-RUN         apt -y install nginx supervisor
+RUN         apt -y install gcc nginx supervisor
 RUN         pip3 install uwsgi
 
 # requirements.txt파일만 복사 후, 패키지 설치
@@ -20,11 +17,6 @@ RUN         pip3 install -r /tmp/requirements.txt
 # 전체 소스코드 복사
 COPY        ./   /srv/project
 WORKDIR     /srv/project
-
-# settings모듈에 대한 환경변수 설정
-# export DJANGO_SETTINGS_MODULE=config.settings.production
-ENV         DJANGO_SETTINGS_MODULE  config.settings.production
-ENV         LANG                    C.UTF-8
 
 # 프로세스를 실행할 명령
 WORKDIR     /srv/project/app

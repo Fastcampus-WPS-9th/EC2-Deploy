@@ -4,7 +4,7 @@ secrets = json.load(open(os.path.join(SECRETS_DIR, 'production.json')))
 
 DEBUG = False
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.production.application'
 
 DATABASES = secrets['DATABASES']
 
