@@ -14,6 +14,8 @@ RUN         pip3 install uwsgi
 COPY        requirements-production.txt /tmp/requirements.txt
 RUN         pip3 install -r /tmp/requirements.txt
 
+ENV         DJANGO_SETTINGS_MODULE  config.settings.production
+
 # 전체 소스코드 복사
 COPY        ./   /srv/project
 WORKDIR     /srv/project
@@ -36,6 +38,9 @@ RUN         ln -sf  /etc/nginx/sites-available/app.nginx \
 # supervisor설정파일 복사
 RUN         cp -f   /srv/project/.config/supervisord.conf \
                     /etc/supervisor/conf.d/
+
+# 80번 포트 개방
+EXPOSE      80
 
 # Command로 supervisor실행
 CMD         supervisord -n
