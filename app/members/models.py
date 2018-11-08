@@ -13,3 +13,4 @@ class User(AbstractUser):
     # - 해당 폴더에 저장되고
     # - 링크클릭하면 정상적으로 나오는지 확인
     img_profile = models.ImageField(upload_to='user', blank=True)
+    nickname = models.CharField(max_length=20, unique=True, blank=True, null=True)
