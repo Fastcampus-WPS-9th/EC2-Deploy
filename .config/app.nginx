@@ -4,8 +4,9 @@ server {
 server {
     # 80번 포트로부터 받은 요청을 처리
     listen 80;
+    listen 443;
 
-    # 도메인이 'localhost'에 해당 할 때
+    # 도메인이 pby.kr관련과 *.elasticbeanstalk.com일 경우
     server_name pby.kr www.pby.kr api.pby.kr *.elasticbeanstalk.com;
 
     # 인코딩방식
@@ -28,5 +29,9 @@ server {
     }
     location /media/ {
         alias   /srv/project/.media/;
+    }
+
+    if ($http_x_forwarded_proto = 'http') {
+        return 301 https://$host$request_uri;
     }
 }
